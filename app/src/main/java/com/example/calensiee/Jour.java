@@ -17,6 +17,7 @@ public class Jour {
         this.jour = jour;
         this.mois = mois;
         this.annee = annee;
+        //heure
         this.heure = heure;
         this.duree = duree;
         this.nom = nom;
