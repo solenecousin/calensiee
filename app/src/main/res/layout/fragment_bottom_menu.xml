@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Menu"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/pastel_blue"
+    android:layout_height="80dp"
+    android:layout_gravity="bottom"
+    android:orientation="horizontal"
+    tools:context=".MainActivity">
+    <!-- display two Button's and a FrameLayout to replace the Fragment's  -->
+
+    <Button
+        android:id="@+id/Semaine"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/pastel_blue"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/ic_baseline_calendar_view_week_24"
+        android:paddingTop="10dp"
+        android:text="Semaine"
+        style="?android:attr/borderlessButtonStyle"/>
+
+    <Button
+        android:id="@+id/Mois"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/pastel_blue"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/ic_baseline_calendar_month_24"
+        android:paddingTop="10dp"
+        android:text="Mois"
+        style="?android:attr/borderlessButtonStyle"/>
+
+    <Button
+        android:id="@+id/Reglages"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/pastel_blue"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/ic_baseline_settings_24"
+        android:paddingTop="10dp"
+        android:text="Réglages"
+        style="?android:attr/borderlessButtonStyle"/>
+
+
+</LinearLayout>
