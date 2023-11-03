@@ -26,13 +26,13 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
         BottomMenuFragment bottomMenuFragment = new BottomMenuFragment();
         SemaineFragment semaineFragment = new SemaineFragment();
 
+
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.main_fragment_layout, semaineFragment)
                 .add(R.id.menu_fragment_layout, bottomMenuFragment)
-                .comit();
+                .commit();
 
     }
-//test push
 
     //@Override // for nested class ListFragment.onItemClickListener
     public void onItemSelectedBottom(int position) {

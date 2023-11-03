@@ -3,7 +3,6 @@ package com.example.calensiee;
 public class Jour {
     boolean event;
     int jour;
-    int day;
     int mois;
     int annee;
     int heure;
