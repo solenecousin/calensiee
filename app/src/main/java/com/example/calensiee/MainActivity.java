@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.main_fragment_layout, semaineFragment)
                 .add(R.id.menu_fragment_layout, bottomMenuFragment)
-                .commit();
+                .comit();
 
     }
-
+//test push
 
     //@Override // for nested class ListFragment.onItemClickListener
     public void onItemSelectedBottom(int position) {
