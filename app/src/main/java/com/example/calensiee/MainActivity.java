@@ -31,9 +31,8 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
                 .add(R.id.menu_fragment_layout, bottomMenuFragment)
                 .commit();
 
-
-
     }
+
 
     //@Override // for nested class ListFragment.onItemClickListener
     public void onItemSelectedBottom(int position) {
