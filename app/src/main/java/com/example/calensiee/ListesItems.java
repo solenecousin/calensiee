@@ -53,7 +53,7 @@ public class ListesItems extends AppCompatActivity {
             //create RV adapter from data (fruits strings)
             rvAdapter = new RVAdapter(data);
 
-            recyclerView = (RecyclerView) findViewById(R.id.rv_fruits);
+            //recyclerView = (RecyclerView) findViewById(R.id.rv_fruits);
 
             // set adapter to RV
             recyclerView.setAdapter(rvAdapter);

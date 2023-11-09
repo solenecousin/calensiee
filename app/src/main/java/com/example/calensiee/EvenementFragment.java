@@ -40,6 +40,8 @@ public class EvenementFragment extends Fragment {
      * @return A new instance of fragment EvenementFragment.
      */
     // TODO: Rename and change types and number of parameters
+
+    /**
     public static EvenementFragment newInstance(String param1, String param2) {
         EvenementFragment fragment = new EvenementFragment();
         Bundle args = new Bundle();
@@ -90,4 +92,5 @@ public class EvenementFragment extends Fragment {
         Toast.makeText(getActivity(), listeJours.get(Integer.parseInt(getArguments().getString("dayEvent"))).getNom(), Toast.LENGTH_SHORT).show();
         return myView;
     }
+    */
 }

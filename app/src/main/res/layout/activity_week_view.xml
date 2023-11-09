@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/back"
-            android:textColor="@color/blue"
+            android:textColor="@color/esiee_blue"
             android:background="@null"
             android:textStyle="bold"
             android:onClick="previousWeekAction"
