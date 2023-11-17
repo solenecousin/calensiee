@@ -29,7 +29,6 @@ public class MenuView extends AppCompatActivity
         setContentView(R.layout.menu);
     }
 
-
     public void monthAction(View view)
     {
         startActivity(new Intent(this, MonthView.class));
