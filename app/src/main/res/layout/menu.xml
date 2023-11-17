@@ -77,6 +77,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/ic_cross_button"
         android:rotation="0"
+        android:onClick="Close"
         app:layout_constraintBottom_toTopOf="@+id/A_la_une"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

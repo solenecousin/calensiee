@@ -57,7 +57,9 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
     {
         startActivity(new Intent(this, MonthView.class));
     }
-
+public void Close(View view){
+        startActivity(new Intent(this, MonthView.class));
+}
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
