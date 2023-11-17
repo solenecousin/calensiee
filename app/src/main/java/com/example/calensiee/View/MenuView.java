@@ -20,10 +20,13 @@ import java.util.ArrayList;
 
 public class MenuView extends AppCompatActivity
 {
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
     }
+
+
 }

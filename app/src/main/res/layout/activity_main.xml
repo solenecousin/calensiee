@@ -25,7 +25,7 @@
         android:layout_gravity="center"
         android:background="@null"
         android:onClick="weeklyAction"
-        android:text="Weekly"
+        android:text="Semaine"
         android:textColor="@color/esiee_blue"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="LUN"
-            android:textColor="@color/esiee_light_grey"
+            android:textColor="@color/esiee_light_blue"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -101,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="JEU"
-            android:textColor="@color/esiee_light_grey"
+            android:textColor="@color/esiee_light_blue"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="VEN"
-            android:textColor="@color/esiee_light_grey"
+            android:textColor="@color/esiee_light_blue"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -119,7 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="SAM"
-            android:textColor="@color/esiee_light_grey"
+            android:textColor="@color/esiee_light_blue"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -128,7 +128,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="DIM"
-            android:textColor="@color/esiee_light_grey"
+            android:textColor="@color/esiee_light_blue"
             android:textAlignment="center"
             android:textSize="16sp"/>
 

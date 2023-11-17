@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="LUN"
-            android:textColor="@color/esiee_light_grey"
+            android:textColor="@color/esiee_light_blue"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="MAR"
-            android:textColor="@color/esiee_light_grey"
+            android:textColor="@color/esiee_light_blue"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="MER"
-            android:textColor="@color/esiee_light_grey"
+            android:textColor="@color/esiee_light_blue"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="JEU"
-            android:textColor="@color/esiee_light_grey"
+            android:textColor="@color/esiee_light_blue"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="VEN"
-            android:textColor="@color/esiee_light_grey"
+            android:textColor="@color/esiee_light_blue"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -99,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="SAM"
-            android:textColor="@color/esiee_light_grey"
+            android:textColor="@color/esiee_light_blue"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="DIM"
-            android:textColor="@color/esiee_light_grey"
+            android:textColor="@color/esiee_light_blue"
             android:textAlignment="center"
             android:textSize="16sp"/>
 
