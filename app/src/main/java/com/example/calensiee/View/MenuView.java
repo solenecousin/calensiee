@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.calensiee.CalendarUtils;
 import com.example.calensiee.R;
 
 import java.time.LocalDate;
@@ -28,5 +29,13 @@ public class MenuView extends AppCompatActivity
         setContentView(R.layout.menu);
     }
 
+
+    public void monthAction(View view)
+    {
+        startActivity(new Intent(this, MonthView.class));
+    }
+    public void Close(View view){
+        startActivity(new Intent(this, MonthView.class));
+    }
 
 }
