@@ -7,47 +7,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".WeekViewActivity">
+    tools:context=".View.WeekViewActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="35dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp">
+        android:orientation="horizontal">
 
         <Button
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/back"
-            android:textColor="@color/esiee_blue"
-            android:background="@null"
-            android:textStyle="bold"
+            android:background="@drawable/ic_arrow_blue"
             android:onClick="previousWeekAction"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/monthYearTV"
-            android:layout_width="0dp"
-            android:layout_weight="2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:text="Feb 2021"
-            android:textSize="20sp"
             android:textAlignment="center"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
         <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/forward"
-            android:textColor="@color/esiee_blue"
-            android:background="@null"
-            android:textStyle="bold"
+            android:background="@drawable/ic_arrow_blue"
             android:onClick="nextWeekAction"
-            android:textSize="20sp"/>
-
+            android:rotation="180"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout

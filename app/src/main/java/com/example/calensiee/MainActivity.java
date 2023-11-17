@@ -8,59 +8,74 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import static com.example.calensiee.CalendarUtils.daysInMonthArray;
 import static com.example.calensiee.CalendarUtils.monthYearFromDate;
 
+import com.example.calensiee.View.MenuView;
+import com.example.calensiee.View.MonthView;
+import com.example.calensiee.View.WeekViewActivity;
+
+
 public class MainActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener
 {
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
+    //private FirebaseFirestore mFirestore;
+    //private FirebaseAuth mAuth;
 
+
+    //@Override
+    //public void onStart() {
+        //super.onStart();
+
+        // Check if user is signed in (non-null) and update UI accordingly.
+        //FirebaseUser currentUser = mAuth.getCurrentUser();
+        //if(currentUser != null){
+            //currentUser.reload();
+        //}
+    //}
+    //@Override
+    //public void onStop() {
+      //  super.onStop();
+        //if (mAdapter != null) {
+        //    mAdapter.stopListening();
+        //}
+    //}
+    public void weeklyAction(View view)
+    {
+        startActivity(new Intent(this, WeekViewActivity.class));
+    }
+    public void menuAction(View view)
+    {
+        startActivity(new Intent(this, MenuView.class));
+    }
+    public void monthAction(View view)
+    {
+        startActivity(new Intent(this, MonthView.class));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initWidgets();
-        CalendarUtils.selectedDate = LocalDate.now();
-        setMonthView();
-    }
+        setContentView(R.layout.menu);
 
-    private void initWidgets()
-    {
-        calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
-        monthYearText = findViewById(R.id.monthYearTV);
-    }
+        // Initialize Firebase Auth
+        //mAuth = FirebaseAuth.getInstance();
 
-    private void setMonthView()
-    {
-        monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
-        ArrayList<LocalDate> daysInMonth = daysInMonthArray(CalendarUtils.selectedDate);
+        // Enable Firestore logging
+        //FirebaseFirestore.setLoggingEnabled(true);
 
-        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
-        calendarRecyclerView.setLayoutManager(layoutManager);
-        calendarRecyclerView.setAdapter(calendarAdapter);
-    }
+        // Initialize Firestore and the main RecyclerView
+        //mFirestore = FirebaseUtil.getFirestore();
 
-    public void previousMonthAction(View view)
-    {
-        CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusMonths(1);
-        setMonthView();
-    }
-
-    public void nextMonthAction(View view)
-    {
-        CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusMonths(1);
-        setMonthView();
+        //MonthView.initWidgets();
+        //CalendarUtils.selectedDate = LocalDate.now();
+        //MonthView.setMonthView();
     }
 
     @Override
@@ -69,13 +84,8 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         if(date != null)
         {
             CalendarUtils.selectedDate = date;
-            setMonthView();
         }
     }
 
-    public void weeklyAction(View view)
-    {
 
-        startActivity(new Intent(this, WeekViewActivity.class));
-    }
 }
