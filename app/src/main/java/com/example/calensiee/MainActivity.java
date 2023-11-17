@@ -10,32 +10,22 @@ import com.example.calensiee.View.MenuView;
 import com.example.calensiee.View.MonthView;
 import com.example.calensiee.View.WeekViewActivity;
 
+import org.checkerframework.checker.units.qual.C;
 
-public class MainActivity extends AppCompatActivity
-{
+import java.time.LocalDate;
 
-    public void weeklyAction(View view)
-    {
-        startActivity(new Intent(this, WeekViewActivity.class));
-    }
-    public void menuAction(View view)
-    {
-        startActivity(new Intent(this, MenuView.class));
-    }
-    public void monthAction(View view)
-    {
-        startActivity(new Intent(this, MonthView.class));
-    }
-    public void Close(View view){
-        startActivity(new Intent(this, MonthView.class));
-    }
+
+public class MainActivity extends AppCompatActivity {
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
+        //setContentView(R.layout.auth);
         startActivity(new Intent(this, EmailPasswordActivity.class));
 
     }
+
 
 }
