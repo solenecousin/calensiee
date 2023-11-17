@@ -46,7 +46,6 @@ public class EmailPasswordActivity extends AppCompatActivity
     // [START declare_auth]
     private FirebaseAuth mAuth;
     // [END declare_auth]
-    private Button seConnecterButt = findViewById(R.id.button4);
     private EditText textEmail;
     private EditText textPassword;
 
