@@ -56,6 +56,7 @@ public class EmailPasswordActivity extends AppCompatActivity
         // [START initialize_auth]
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+        setContentView(R.layout.auth);
 
         // [END initialize_auth]
     }

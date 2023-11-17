@@ -69,7 +69,7 @@ public void Close(View view){
         // Enable Firestore logging
         //FirebaseFirestore.setLoggingEnabled(true);
 
-        setContentView(R.layout.menu);
+        startActivity(new Intent(this, EmailPasswordActivity.class));
 
 
         // Initialize Firestore and the main RecyclerView
