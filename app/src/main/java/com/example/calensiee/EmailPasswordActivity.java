@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -45,7 +46,7 @@ public class EmailPasswordActivity extends AppCompatActivity
     // [START declare_auth]
     private FirebaseAuth mAuth;
     // [END declare_auth]
-
+    private Button seConnecterButt = findViewById(R.id.button4);
     private EditText textEmail;
     private EditText textPassword;
 
@@ -55,6 +56,7 @@ public class EmailPasswordActivity extends AppCompatActivity
         // [START initialize_auth]
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+
         // [END initialize_auth]
     }
 
@@ -119,16 +121,18 @@ public class EmailPasswordActivity extends AppCompatActivity
     }
 
     public void seConnecter(View view){
+        initWidgets();
         String email = textEmail.getText().toString();
         String password = textPassword.getText().toString();
         signIn(email,password);
-        finish();
     }
 
     private void initWidgets()
     {
+
         textEmail = findViewById(R.id.editTextTextEmailAddress);
         textPassword = findViewById(R.id.editTextTextPassword);
+
     }
 
     private void sendEmailVerification() {

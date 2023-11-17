@@ -18,10 +18,11 @@
         android:text="Se connecter"
         android:textColor="@color/esiee_light_grey"
         android:textSize="15sp"
+        android:onClick="seConnecter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:onClick="seConnecter"/>
+        app:layout_constraintStart_toStartOf="parent"/>
+
 
     <Button
         android:id="@+id/button5"

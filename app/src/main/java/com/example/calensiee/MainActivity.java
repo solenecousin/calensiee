@@ -69,7 +69,8 @@ public void Close(View view){
         // Enable Firestore logging
         //FirebaseFirestore.setLoggingEnabled(true);
 
-        setContentView(R.layout.auth);
+        setContentView(R.layout.menu);
+
 
         // Initialize Firestore and the main RecyclerView
         //mFirestore = FirebaseUtil.getFirestore();
@@ -84,6 +85,7 @@ public void Close(View view){
             CalendarUtils.selectedDate = date;
         }
     }
+
 
 
 }
