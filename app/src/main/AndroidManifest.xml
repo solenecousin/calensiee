@@ -13,6 +13,7 @@
         <activity android:name=".View.WeekViewActivity" />
         <activity android:name=".View.MenuView" />
         <activity android:name=".View.MonthView" />
+        <activity android:name=".EmailPasswordActivity" />
         <activity android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -18,6 +18,8 @@ import static com.example.calensiee.CalendarUtils.monthYearFromDate;
 import com.example.calensiee.View.MenuView;
 import com.example.calensiee.View.MonthView;
 import com.example.calensiee.View.WeekViewActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class MainActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener
@@ -25,7 +27,6 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
     //private FirebaseFirestore mFirestore;
-    //private FirebaseAuth mAuth;
 
 
     //@Override
@@ -64,20 +65,15 @@ public void Close(View view){
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu);
-
-        // Initialize Firebase Auth
-        //mAuth = FirebaseAuth.getInstance();
 
         // Enable Firestore logging
         //FirebaseFirestore.setLoggingEnabled(true);
 
+        setContentView(R.layout.auth);
+
         // Initialize Firestore and the main RecyclerView
         //mFirestore = FirebaseUtil.getFirestore();
 
-        //MonthView.initWidgets();
-        //CalendarUtils.selectedDate = LocalDate.now();
-        //MonthView.setMonthView();
     }
 
     @Override
