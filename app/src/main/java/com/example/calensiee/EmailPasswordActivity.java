@@ -83,6 +83,8 @@ public class EmailPasswordActivity extends AppCompatActivity
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+                            Intent intent = new Intent(EmailPasswordActivity.this, MenuView.class);
+                            startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -148,8 +150,17 @@ public class EmailPasswordActivity extends AppCompatActivity
                 });
         // [END send_email_verification]
     }
-
+/*
+   public void creerCompte(View view){
+        setContentView(R.layout.account_create);
+        initWidgets();
+        String email = textEmail.getText().toString();
+        String password = textPassword.getText().toString();
+        createAccount(email,password);
+   }*/
     private void reload() { }
 
-    private void updateUI(FirebaseUser user) { }
+    private void updateUI(FirebaseUser user) {
+
+    }
 }
