@@ -150,14 +150,10 @@ public class EmailPasswordActivity extends AppCompatActivity
                 });
         // [END send_email_verification]
     }
-/*
+
    public void creerCompte(View view){
-        setContentView(R.layout.account_create);
-        initWidgets();
-        String email = textEmail.getText().toString();
-        String password = textPassword.getText().toString();
-        createAccount(email,password);
-   }*/
+        startActivity(new Intent(EmailPasswordActivity.this, AccountCreate.class));
+   }
     private void reload() { }
 
     private void updateUI(FirebaseUser user) {

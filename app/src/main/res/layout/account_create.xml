@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="parent"
-        tools:context=".EmailPasswordActivity">
+        tools:context=".AccountCreate">
 
         <Button
             android:id="@+id/button6"

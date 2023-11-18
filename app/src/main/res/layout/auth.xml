@@ -32,11 +32,12 @@
         android:layout_marginEnd="8dp"
         android:background="@drawable/ic_blue_pills_button"
         android:text="Créer un compte"
+        android:onClick="creerCompte"
         android:textColor="@color/esiee_light_grey"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <!-- android:onClick="creerCompte"-->
+
 
     <LinearLayout
         android:id="@+id/linearLayout3"
