@@ -118,6 +118,7 @@ public class EmailPasswordActivity extends AppCompatActivity
         // Send verification email
         // [START send_email_verification]
         final FirebaseUser user = mAuth.getCurrentUser();
+
         user.sendEmailVerification()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
@@ -131,6 +132,10 @@ public class EmailPasswordActivity extends AppCompatActivity
    public void creerCompte(View view){
         startActivity(new Intent(EmailPasswordActivity.this, AccountCreate.class));
    }
+
+    public void reinitialiser(View view){
+        startActivity(new Intent(EmailPasswordActivity.this, ForgotPassword.class));
+    }
     private void reload() { }
 
     private void updateUI(FirebaseUser user) {

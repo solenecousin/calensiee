@@ -15,6 +15,7 @@
         <activity android:name=".View.MonthView" />
         <activity android:name=".EmailPasswordActivity" />
         <activity android:name=".AccountCreate" />
+        <activity android:name=".ForgotPassword" />
         <activity android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
