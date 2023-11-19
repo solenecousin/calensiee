@@ -18,12 +18,9 @@ import androidx.annotation.NonNull;
 
 public class ForgotPassword extends AppCompatActivity {
 
-    private static final String TAG = "EmailPassword";
-    // [START declare_auth]
     private FirebaseAuth mAuth;
     // [END declare_auth]
     private EditText textEmail;
-    private EditText textPassword;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,7 +29,6 @@ public class ForgotPassword extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.password_reset);
-
         // [END initialize_auth]
     }
 
@@ -64,24 +60,16 @@ public class ForgotPassword extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(ForgotPassword.this, "Error :- " + e.getMessage(), Toast.LENGTH_SHORT).show();
-
                         }
                     });
-        }
-
-     else
-
-    {
+        }        else{
         textEmail.setError("Email field can't be empty");
+        }
     }
-
-}
     private void initWidgets()
     {
         textEmail = findViewById(R.id.editTextTextEmailAddress);
-
     }
     private void reload() { }
-
     private void updateUI(FirebaseUser user) { }
 }

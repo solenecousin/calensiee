@@ -16,6 +16,8 @@
         <activity android:name=".EmailPasswordActivity" />
         <activity android:name=".AccountCreate" />
         <activity android:name=".ForgotPassword" />
+        <activity android:name=".View.MonCompteActivity" />
+        <activity android:name=".View.ALaUneActivity" />
         <activity android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

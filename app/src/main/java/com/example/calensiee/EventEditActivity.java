@@ -14,7 +14,6 @@ public class EventEditActivity extends AppCompatActivity
 {
     private EditText eventNameET;
     private TextView eventDateTV, eventTimeTV;
-
     private LocalTime time;
 
     @Override
@@ -41,6 +40,9 @@ public class EventEditActivity extends AppCompatActivity
         Event newEvent = new Event(eventName, CalendarUtils.selectedDate, time);
         Event.eventsList.add(newEvent);
         finish();
+    }
+    public void backToWeekAction(View view){
+        this.finish();
     }
 }
 

@@ -9,15 +9,16 @@
     tools:context=".View.MonthView">
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|left"
-        android:background="@null"
+        android:id="@+id/bouton_menu"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/ic_blue_pills_button"
         android:onClick="menuAction"
-        android:text="menu"
-        android:textColor="@color/esiee_blue"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:text="≡"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/esiee_light_grey" />
 
     <Button
         android:layout_width="wrap_content"
@@ -29,6 +30,7 @@
         android:textColor="@color/esiee_blue"
         android:textSize="20sp"
         android:textStyle="bold" />
+
 
 
     <LinearLayout

@@ -11,13 +11,11 @@ public class Event
     public static ArrayList<Event> eventsForDate(LocalDate date)
     {
         ArrayList<Event> events = new ArrayList<>();
-
         for(Event event : eventsList)
         {
             if(event.getDate().equals(date))
                 events.add(event);
         }
-
         return events;
     }
 
