@@ -17,6 +17,16 @@ import android.widget.TimePicker;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+
+import androidx.annotation.NonNull;
+import android.util.Log;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class EventEditActivity extends AppCompatActivity
 {
     private EditText eventNameET;
@@ -47,9 +57,7 @@ public class EventEditActivity extends AppCompatActivity
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 openDatePicker(); // Open date picker dialog
-
                 openTimePicker(); //Open time picker dialog
             }
         });
@@ -64,9 +72,30 @@ public class EventEditActivity extends AppCompatActivity
 
     public void saveEventAction(View view)
     {
+
+
         String eventName = eventNameET.getText().toString();
         Event newEvent = new Event(eventName, LocalDate.of(mYear,mMonth,mDay), LocalTime.of(mHour,mMinute));
         Event.eventsList.add(newEvent);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference().child("Event");
+
+        myRef.child(String.valueOf(newEvent.getId())).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                myRef.child(String.valueOf(newEvent.getId())).setValue(newEvent);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
         finish();
     }
     public void backToWeekAction(View view){
@@ -81,7 +110,7 @@ public class EventEditActivity extends AppCompatActivity
                 mMonth = month+1;
                 mDay = day;
                 //Showing the picked value in the textView
-                eventDateTV.setText("Date : "+CalendarUtils.formattedDate(LocalDate.of(mYear,mMonth,mDay)));
+                eventDateTV.setText("Date : " + CalendarUtils.formattedDate(LocalDate.of(mYear,mMonth,mDay) ) );
 
             }
         }, date.getYear(), date.getMonthValue()-1, date.getDayOfMonth());
