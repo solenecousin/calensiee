@@ -80,15 +80,17 @@ public class EventEditActivity extends AppCompatActivity
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference().child("Event");
+        Event event = getIntent().getParcelableExtra("Event");
 
-        myRef.child(String.valueOf(newEvent.getId())).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child(event.getName()).child(String.valueOf(event.getDate())).child(String.valueOf(event.getTime())).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                myRef.child(String.valueOf(newEvent.getId())).setValue(newEvent);
+                myRef.child(event.getName()).child(String.valueOf(event.getDate())).child(String.valueOf(event.getTime())).setValue(event);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
 
             }
         });

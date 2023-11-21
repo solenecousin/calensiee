@@ -31,6 +31,7 @@ public class Event
         this.time = time;
     }
 
+
     public String getName()
     {
         return name;
@@ -60,4 +61,6 @@ public class Event
     {
         this.time = time;
     }
+
+
 }
