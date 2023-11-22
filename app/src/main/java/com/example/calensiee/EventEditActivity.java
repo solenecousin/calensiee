@@ -20,7 +20,9 @@ import java.time.LocalTime;
 
 import androidx.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,7 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 public class EventEditActivity extends AppCompatActivity
 {
     private EditText eventNameET;
-    private TextView eventDateTV, eventTimeTV;
+    private TextView eventDateET, eventTimeET, eventPlaceET,eventDurationET,eventClubET,eventDescriptionET;
     private LocalTime time;
     private LocalDate date;
     private Button button;
@@ -46,14 +48,17 @@ public class EventEditActivity extends AppCompatActivity
         initWidgets();
         time = LocalTime.now();
         date = LocalDate.now();
-        //eventDateTV.setText("Date: " + CalendarUtils.formattedDate(CalendarUtils.selectedDate));
-        //eventTimeTV.setText("Time: " + CalendarUtils.formattedTime(time));
 
+        mYear   = date.getYear();
+        mMonth  = date.getMonthValue();
+        mDay    = date.getDayOfMonth();
+        eventDateET.setText("Date : " + CalendarUtils.formattedDate(LocalDate.of(mYear,mMonth,mDay)));
 
+        mHour   = time.getHour();
+        mMinute = time.getMinute();
+        eventTimeET.setText("Time : "+CalendarUtils.formattedTime(LocalTime.of(mHour,mMinute)));
 
         button = findViewById(R.id.button);
-
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,37 +71,47 @@ public class EventEditActivity extends AppCompatActivity
     private void initWidgets()
     {
         eventNameET = findViewById(R.id.eventNameET);
-        eventDateTV = findViewById(R.id.eventDateTV);
-        eventTimeTV = findViewById(R.id.eventTimeTV);
+        eventDateET = findViewById(R.id.eventDateTV);
+        eventTimeET = findViewById(R.id.eventTimeTV);
+        eventPlaceET = findViewById(R.id.eventPlaceTV);
+        eventClubET = findViewById(R.id.eventClubTV);
+        eventDurationET = findViewById(R.id.eventDurationTV);
+        eventDescriptionET = findViewById(R.id.eventDescriptionTV);
     }
 
     public void saveEventAction(View view)
     {
+        if(eventNameET.getText().toString().isEmpty() || eventPlaceET.getText().toString().isEmpty() ||
+                eventClubET.getText().toString().isEmpty() || eventDurationET.getText().toString().isEmpty()){
+
+            Toast.makeText(EventEditActivity.this, "Please fill in all fields.",
+                    Toast.LENGTH_SHORT).show();
+
+        }
+        else if(eventDescriptionET.getText().toString().isEmpty()){
+            String eventName = eventNameET.getText().toString();
+            String eventPlace = eventPlaceET.getText().toString();
+            String eventClub = eventClubET.getText().toString();
+            //int eventDuration = Integer.getInteger(eventDurationET.getText().toString());
+            Event newEvent = new Event(eventName, LocalDate.of(mYear,mMonth,mDay), LocalTime.of(mHour,mMinute),eventPlace,"No description for this event.",eventClub);
+            Event.eventsList.add(newEvent);
+            finish();
+        }
+        else{
+            String eventName = eventNameET.getText().toString();
+            String eventPlace = eventPlaceET.getText().toString();
+            String eventClub = eventClubET.getText().toString();
+            //int eventDuration = Integer.getInteger(eventDurationET.getText().toString());
+            String eventDescription = eventDescriptionET.getText().toString();
 
 
-        String eventName = eventNameET.getText().toString();
-        Event newEvent = new Event(eventName, LocalDate.of(mYear,mMonth,mDay), LocalTime.of(mHour,mMinute));
-        Event.eventsList.add(newEvent);
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference().child("Event");
-
-        myRef.child(String.valueOf(newEvent.getId())).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                myRef.child(String.valueOf(newEvent.getId())).setValue(newEvent);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
-
-
-        finish();
+            Event newEvent = new Event(eventName, LocalDate.of(mYear,mMonth,mDay), LocalTime.of(mHour,mMinute),eventPlace,eventDescription,eventClub);
+            Event.eventsList.add(newEvent);
+            //FirebaseDatabase database = FirebaseDatabase.getInstance();
+            //DatabaseReference myRef = database.getReference().child("Event");
+            //myRef.setValue(newEvent);
+            finish();
+        }
     }
     public void backToWeekAction(View view){
         this.finish();
@@ -110,8 +125,7 @@ public class EventEditActivity extends AppCompatActivity
                 mMonth = month+1;
                 mDay = day;
                 //Showing the picked value in the textView
-                eventDateTV.setText("Date : " + CalendarUtils.formattedDate(LocalDate.of(mYear,mMonth,mDay) ) );
-
+                eventDateET.setText("Date : " + CalendarUtils.formattedDate(LocalDate.of(mYear,mMonth,mDay) ) );
             }
         }, date.getYear(), date.getMonthValue()-1, date.getDayOfMonth());
 
@@ -127,7 +141,7 @@ public class EventEditActivity extends AppCompatActivity
                 mHour = hour;
                 mMinute = minute;
                 //Showing the picked value in the textView
-                eventTimeTV.setText("Time : "+CalendarUtils.formattedTime(LocalTime.of(mHour,mMinute)));
+                eventTimeET.setText("Time : "+CalendarUtils.formattedTime(LocalTime.of(mHour,mMinute)));
 
             }
         }, time.getHour(), time.getMinute(), true);

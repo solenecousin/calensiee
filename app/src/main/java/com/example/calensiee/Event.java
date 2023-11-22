@@ -23,12 +23,34 @@ public class Event
     private String name;
     private LocalDate date;
     private LocalTime time;
+    private String place, description, club;
+    private int  duration;
 
     public Event(String name, LocalDate date, LocalTime time)
     {
         this.name = name;
         this.date = date;
         this.time = time;
+    }
+
+    public Event(String name, LocalDate date, LocalTime time,String place, String description, int duration, String club)
+    {
+        this.name = name;
+        this.date = date;
+        this.time = time;
+        this.place = place;
+        this.description = description;
+        this.duration = duration;
+        this.club = club;
+    }
+    public Event(String name, LocalDate date, LocalTime time,String place, String description, String club)
+    {
+        this.name = name;
+        this.date = date;
+        this.time = time;
+        this.place = place;
+        this.description = description;
+        this.club = club;
     }
 
     public String getName()
@@ -60,4 +82,27 @@ public class Event
     {
         this.time = time;
     }
+
+    public String getPlace()
+    {
+        return place;
+    }
+    public void setPlace(String place)
+    {
+        this.place = place;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    public String getClub(){ return club; }
+    public void setClub(String club){this.club = club;}
+    public int getDuration() {return duration;}
 }
