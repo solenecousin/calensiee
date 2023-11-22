@@ -25,7 +25,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ALaUneActivity extends AppCompatActivity {
-    private ListView eventListView;
+    private RecyclerView eventListView;
     //private ListView eventListView;
 
     @Override
@@ -58,7 +58,7 @@ public class ALaUneActivity extends AppCompatActivity {
     private void setEventAdpater()
     {
         ArrayList<Event> dailyEvents = Event.eventsForDate(CalendarUtils.selectedDate);
-        EventAdapter eventAdapter = new EventAdapter(getApplicationContext(), dailyEvents);
+        EventAdapter eventAdapter = new EventAdapter(dailyEvents);
         eventListView.setAdapter(eventAdapter);
     }
 
