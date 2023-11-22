@@ -9,15 +9,35 @@
     android:orientation="vertical"
     tools:context=".View.WeekViewActivity">
 
-    <Button
-        android:id="@+id/button9"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/ic_blue_pills_button"
-        android:foreground="@drawable/ic_arrow_light_grey"
-        android:onClick="backToMonthAction" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button11"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/ic_blue_pills_button"
+            android:foreground="@drawable/ic_arrow_light_grey"
+            android:onClick="backToMonthAction" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/ic_calendar_icon"
+            android:onClick="backToTodayAction" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

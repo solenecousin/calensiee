@@ -80,4 +80,9 @@ public class MonthView extends AppCompatActivity implements CalendarAdapter.OnIt
     public void onItemClick(int position, LocalDate date) {
         //do nothing
     }
+
+    public void backToTodayAction(View view){
+        CalendarUtils.selectedDate = LocalDate.now();
+        setMonthView();
+    }
 }

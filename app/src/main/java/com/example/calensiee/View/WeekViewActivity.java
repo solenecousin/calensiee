@@ -98,4 +98,8 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
     public void backToMonthAction(View view){
         this.finish();
     }
+    public void backToTodayAction(View view){
+        CalendarUtils.selectedDate = LocalDate.now();
+        setWeekView();
+    }
 }

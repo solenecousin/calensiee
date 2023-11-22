@@ -8,18 +8,35 @@
     android:orientation="vertical"
     tools:context=".View.MonthView">
 
-    <Button
-        android:id="@+id/bouton_menu"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/ic_blue_pills_button"
-        android:onClick="menuAction"
-        android:text="≡"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/esiee_light_grey" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/bouton_menu"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_blue_pills_button"
+            android:onClick="menuAction"
+            android:text="≡"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/esiee_light_grey" />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/ic_calendar_icon"
+            android:onClick="backToTodayAction" />
+</LinearLayout>
 
     <Button
         android:layout_width="125dp"
