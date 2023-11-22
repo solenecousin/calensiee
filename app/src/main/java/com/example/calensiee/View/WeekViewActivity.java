@@ -27,7 +27,7 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
 {
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
-    private ListView eventListView;
+    private RecyclerView eventRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -42,7 +42,7 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
     {
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
         monthYearText = findViewById(R.id.monthYearTV);
-        eventListView = findViewById(R.id.eventListView);
+        eventRecyclerView = findViewById(R.id.eventRecycleView);
     }
 
     private void setWeekView()
@@ -88,7 +88,7 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
     {
         ArrayList<Event> dailyEvents = Event.eventsForDate(CalendarUtils.selectedDate);
         EventAdapter eventAdapter = new EventAdapter(getApplicationContext(), dailyEvents);
-        eventListView.setAdapter(eventAdapter);
+        eventRecyclerView.setAdapter(eventAdapter);
     }
 
     public void newEventAction(View view)

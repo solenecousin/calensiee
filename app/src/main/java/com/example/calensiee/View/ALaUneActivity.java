@@ -39,7 +39,7 @@ public class ALaUneActivity extends AppCompatActivity {
 
     private void initWidgets()
     {
-        eventListView = findViewById(R.id.eventListView);
+        eventListView = findViewById(R.id.eventRecycleView);
     }
 
     private void setNextEvents()
