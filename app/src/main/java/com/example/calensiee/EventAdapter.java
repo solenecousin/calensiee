@@ -1,7 +1,5 @@
 package com.example.calensiee;
 
-
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,33 +11,35 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
-
     private List<Event> events;
-
     private Event event;
-    public EventAdapter(List<Event> events) {
-        this.events = events;
-    }
+    private OnItemListener onItemListener;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView eventNameTextView;
-        private TextView eventTimeTextView;
-        private TextView eventClubTextView;
+        TextView eventNameTextView;
+        TextView eventTimeTextView;
+        TextView eventClubTextView;
 
-        public ViewHolder(@NonNull View view) {
+        public ViewHolder(View view) {
             super(view);
-            this.eventTimeTextView = (TextView) view.findViewById(R.id.eventTimeCellTV);
-            this.eventClubTextView = (TextView) view.findViewById(R.id.eventClubCellTV);
-            this.eventNameTextView = (TextView) view.findViewById(R.id.eventNameCellTV);
+            eventTimeTextView = view.findViewById(R.id.eventTimeCellTV);
+            eventClubTextView = view.findViewById(R.id.eventClubCellTV);
+            eventNameTextView = view.findViewById(R.id.eventNameCellTV);
         }
     }
 
-    @NonNull
+    public EventAdapter(List<Event> events, EventAdapter.OnItemListener onItemListener) {
+        this.events = events;
+        this.onItemListener = onItemListener;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        /**
         TextView eventClubCellTV = parent.findViewById(R.id.eventClubCellTV);
         TextView eventTimeCellTV = parent.findViewById(R.id.eventTimeCellTV);
         TextView eventNameCellTV = parent.findViewById(R.id.eventNameCellTV);
@@ -50,20 +50,27 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         eventTimeCellTV.setText(eventTime);
         String eventName = event.getName();
         eventNameCellTV.setText(eventName);
-       return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.event_cell, parent, false));
+        */
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_cell, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-       holder.eventClubTextView.setText((CharSequence) events.get(position));
+        Event eventToView = events.get(position);
+        holder.eventNameTextView.setText(eventToView.getName());
+        holder.eventClubTextView.setText(eventToView.getClub());
+        holder.eventTimeTextView.setText(eventToView.getTime().toString());
     }
-
     @Override
     public int getItemCount() {
         return this.events.size();
     }
 
+    public interface  OnItemListener
+    {
+        void onItemClick(int position, Event event);
 
+        void onItemClick(int position, LocalDate date);
+    }
 }
-
-

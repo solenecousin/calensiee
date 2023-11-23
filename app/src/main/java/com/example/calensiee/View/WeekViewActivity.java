@@ -23,7 +23,7 @@ import com.example.calensiee.R;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class WeekViewActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener
+public class WeekViewActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener, EventAdapter.OnItemListener
 {
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
@@ -36,6 +36,7 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
         setContentView(R.layout.activity_week_view);
         initWidgets();
         setWeekView();
+        setEventAdpater();
     }
 
     private void initWidgets()
@@ -54,7 +55,7 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
-        setEventAdpater();
+
     }
 
 
@@ -68,6 +69,16 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
     {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
         setWeekView();
+    }
+
+    @Override
+    public void onItemClick(int position, Event event) {
+        setEventView(event);
+    }
+
+    private void setEventView(Event event) {
+
+
     }
 
     @Override
@@ -87,7 +98,7 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
     private void setEventAdpater()
     {
         ArrayList<Event> dailyEvents = Event.eventsForDate(CalendarUtils.selectedDate);
-        EventAdapter eventAdapter = new EventAdapter(dailyEvents);
+        EventAdapter eventAdapter = new EventAdapter(dailyEvents, this);
         eventRecyclerView.setAdapter(eventAdapter);
     }
 
