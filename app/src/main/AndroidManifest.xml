@@ -17,6 +17,7 @@
         <activity android:name=".ForgotPassword" />
         <activity android:name=".View.MonCompteActivity" />
         <activity android:name=".View.ALaUneActivity" />
+        <activity android:name=".View.EventDetailView" />
         <activity android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
