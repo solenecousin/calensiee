@@ -18,6 +18,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     private List<Event> events;
     //private Event event;
     private OnItemListener onItemListener ;
+    private boolean showDate;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView eventNameTextView;
@@ -32,9 +33,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         }
     }
 
-    public EventAdapter(List<Event> events, EventAdapter.OnItemListener onItemListener) {
+    public EventAdapter(List<Event> events, EventAdapter.OnItemListener onItemListener, boolean showDate) {
         this.events = events;
         this.onItemListener = onItemListener;
+        this.showDate = showDate;
     }
 
     @Override
@@ -60,7 +62,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         Event eventToView = events.get(position);
         holder.eventNameTextView.setText(eventToView.getName());
         holder.eventClubTextView.setText(eventToView.getClub());
-        holder.eventTimeTextView.setText(eventToView.getTime().toString());
+        if(showDate){
+            holder.eventTimeTextView.setText(CalendarUtils.formattedDate(eventToView.getDate())+"  "+eventToView.getTime().toString());
+        }else{
+            holder.eventTimeTextView.setText(eventToView.getTime().toString());
+        }
+
     }
     @Override
     public int getItemCount() {

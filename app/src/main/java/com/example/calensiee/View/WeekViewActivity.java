@@ -22,7 +22,10 @@ import com.example.calensiee.EventEditActivity;
 import com.example.calensiee.R;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class WeekViewActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener, EventAdapter.OnItemListener
 {
@@ -85,8 +88,9 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
     @Override
     public void onItemClick(int position, LocalDate date)
     {
-        CalendarUtils.selectedDate = date;
-        setWeekView();
+        CalendarUtils.selectedDate = date;      //Change the date
+        setWeekView();                          //Set the weekView at the selected date
+        setEventAdpater();                      //Show the events of the selected dates
     }
 
     @Override
@@ -98,8 +102,9 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
 
     private void setEventAdpater()
     {
-        ArrayList<Event> dailyEvents = Event.eventsForDate(CalendarUtils.selectedDate);
-        EventAdapter eventAdapter = new EventAdapter(dailyEvents, this);
+        ArrayList<Event> dailyEvents = Event.eventsForDate(CalendarUtils.selectedDate);     //Select events of a specific day
+        dailyEvents.sort(Comparator.comparing(Event::getTime));                             //Sort events by time
+        EventAdapter eventAdapter = new EventAdapter(dailyEvents, this,false);
         eventRecyclerView.setAdapter(eventAdapter);
         eventRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
@@ -114,5 +119,6 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
     public void backToTodayAction(View view){
         CalendarUtils.selectedDate = LocalDate.now();
         setWeekView();
+        setEventAdpater();
     }
 }

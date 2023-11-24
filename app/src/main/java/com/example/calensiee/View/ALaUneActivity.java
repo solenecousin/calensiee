@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.calensiee.CalendarUtils;
@@ -17,45 +18,45 @@ import com.example.calensiee.R;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class ALaUneActivity extends AppCompatActivity implements EventAdapter.OnItemListener {
-    private RecyclerView eventListView;
-    //private ListView eventListView;
-
+    private RecyclerView eventRecyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alaune);
-        //initWidgets();
-        //setNextEvents();
+        initWidgets();
+        setEventAdpater();
     }
 
     private void initWidgets()
     {
-        eventListView = findViewById(R.id.eventRecycleView);
+        eventRecyclerView = findViewById(R.id.eventRecycleView);
     }
-
-    private void setNextEvents()
-    {
-        ArrayList<LocalDate> days = daysInWeekArray(CalendarUtils.selectedDate);
-        //setEventAdpater();
-    }
-
-    //@Override
-    //protected void onResume()
-    //{
-    //    super.onResume();
-    //    setEventAdpater();
-    //}
 
     private void setEventAdpater()
     {
-        ArrayList<Event> dailyEvents = Event.eventsForDate(CalendarUtils.selectedDate);
-        EventAdapter eventAdapter = new EventAdapter(dailyEvents, this);
-        eventListView.setAdapter(eventAdapter);
+        ArrayList<Event> oneWeekEvent = Event.eventsForDate(LocalDate.now());
+
+        for(long i=1;i<7;i++){
+            ArrayList<Event> dailyEvents = Event.eventsForDate(LocalDate.now().plusDays(i));
+            dailyEvents.sort(Comparator.comparing(Event::getTime));
+            oneWeekEvent.addAll(dailyEvents);
+        }
+
+        EventAdapter eventAdapter = new EventAdapter(oneWeekEvent, this,true);
+        eventRecyclerView.setAdapter(eventAdapter);
+        eventRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        setEventAdpater();
+    }
     public void menuAction(View view)
     {
         startActivity(new Intent(this, MenuView.class));
