@@ -16,8 +16,8 @@ import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
     private List<Event> events;
-    private Event event;
-    private OnItemListener onItemListener;
+    //private Event event;
+    private OnItemListener onItemListener ;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView eventNameTextView;
