@@ -19,6 +19,7 @@ import com.example.calensiee.CalendarUtils;
 import com.example.calensiee.Event;
 import com.example.calensiee.EventAdapter;
 import com.example.calensiee.EventEditActivity;
+import com.example.calensiee.EventUtils;
 import com.example.calensiee.R;
 
 import java.time.LocalDate;
@@ -41,6 +42,7 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
         initWidgets();
         setWeekView();
         setEventAdpater();
+        EventUtils.selectedEvent = new Event("",LocalDate.now(),LocalTime.now(),"","",1,"");
     }
 
     private void initWidgets()
@@ -52,7 +54,9 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
 
     private void setWeekView()
     {
-        monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
+        String month = monthYearFromDate(CalendarUtils.selectedDate);
+        month = month.substring(0,1).toUpperCase() + month.substring(1);     //To capitalize the first lettre of the month
+        monthYearText.setText(month);
         ArrayList<LocalDate> days = daysInWeekArray(CalendarUtils.selectedDate);
 
         CalendarAdapter calendarAdapter = new CalendarAdapter(days, this);
@@ -77,12 +81,8 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
 
     @Override
     public void onItemClick(int position, Event event) {
-        setEventView(event);
-    }
-
-    private void setEventView(Event event) {
-
-
+        EventUtils.selectedEvent = event;
+        startActivity(new Intent(this, EventDetailView.class));
     }
 
     @Override

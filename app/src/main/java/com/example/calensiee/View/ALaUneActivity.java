@@ -14,9 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.calensiee.CalendarUtils;
 import com.example.calensiee.Event;
 import com.example.calensiee.EventAdapter;
+import com.example.calensiee.EventUtils;
 import com.example.calensiee.R;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -29,6 +31,7 @@ public class ALaUneActivity extends AppCompatActivity implements EventAdapter.On
         setContentView(R.layout.alaune);
         initWidgets();
         setEventAdpater();
+        EventUtils.selectedEvent = new Event("",LocalDate.now(), LocalTime.now(),"","",1,"");
     }
 
     private void initWidgets()
@@ -57,6 +60,7 @@ public class ALaUneActivity extends AppCompatActivity implements EventAdapter.On
         super.onResume();
         setEventAdpater();
     }
+
     public void menuAction(View view)
     {
         startActivity(new Intent(this, MenuView.class));
@@ -65,12 +69,8 @@ public class ALaUneActivity extends AppCompatActivity implements EventAdapter.On
 
     @Override
     public void onItemClick(int position, Event event) {
-
-    }
-
-    @Override
-    public void onItemClick(int position, LocalDate date) {
-
+        EventUtils.selectedEvent = event;
+        startActivity(new Intent(this, EventDetailView.class));
     }
 
 }

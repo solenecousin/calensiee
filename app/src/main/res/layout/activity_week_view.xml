@@ -156,20 +156,25 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+
     <Button
-        android:layout_width="153dp"
-        android:layout_height="47dp"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
         android:layout_gravity="center"
         android:background="@drawable/ic_blue_pills_button"
         android:onClick="newEventAction"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="New Event"
+        android:text="Ajouter un événement"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/esiee_light_grey"
         android:textSize="20sp"
         android:textStyle="bold" />
-
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

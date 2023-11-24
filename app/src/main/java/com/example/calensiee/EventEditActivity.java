@@ -92,8 +92,8 @@ public class EventEditActivity extends AppCompatActivity
             String eventName = eventNameET.getText().toString();
             String eventPlace = eventPlaceET.getText().toString();
             String eventClub = eventClubET.getText().toString();
-            //int eventDuration = Integer.getInteger(eventDurationET.getText().toString());
-            Event newEvent = new Event(eventName, LocalDate.of(mYear,mMonth,mDay), LocalTime.of(mHour,mMinute),eventPlace,"No description for this event.",eventClub);
+            int eventDuration = Integer.valueOf(eventDurationET.getText().toString());
+            Event newEvent = new Event(eventName, LocalDate.of(mYear,mMonth,mDay), LocalTime.of(mHour,mMinute),eventPlace,"No description for this event.",eventDuration,eventClub);
             Event.eventsList.add(newEvent);
             finish();
         }
@@ -101,15 +101,10 @@ public class EventEditActivity extends AppCompatActivity
             String eventName = eventNameET.getText().toString();
             String eventPlace = eventPlaceET.getText().toString();
             String eventClub = eventClubET.getText().toString();
-            //int eventDuration = Integer.getInteger(eventDurationET.getText().toString());
+            int eventDuration = Integer.valueOf(eventDurationET.getText().toString());
             String eventDescription = eventDescriptionET.getText().toString();
-
-
-            Event newEvent = new Event(eventName, LocalDate.of(mYear,mMonth,mDay), LocalTime.of(mHour,mMinute),eventPlace,eventDescription,eventClub);
+            Event newEvent = new Event(eventName, LocalDate.of(mYear,mMonth,mDay), LocalTime.of(mHour,mMinute),eventPlace,eventDescription,eventDuration,eventClub);
             Event.eventsList.add(newEvent);
-            //FirebaseDatabase database = FirebaseDatabase.getInstance();
-            //DatabaseReference myRef = database.getReference().child("Event");
-            //myRef.setValue(newEvent);
             finish();
         }
     }

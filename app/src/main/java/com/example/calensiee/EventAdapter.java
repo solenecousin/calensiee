@@ -16,24 +16,33 @@ import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
     private List<Event> events;
-    //private Event event;
-    private OnItemListener onItemListener ;
+    private final OnItemListener onItemListener ;
     private boolean showDate;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        List<Event> events;
         TextView eventNameTextView;
         TextView eventTimeTextView;
         TextView eventClubTextView;
+        EventAdapter.OnItemListener onItemListenerBis;
 
-        public ViewHolder(View view) {
+        public ViewHolder(View view, EventAdapter.OnItemListener onItemListener,List<Event> events) {
             super(view);
             eventTimeTextView = view.findViewById(R.id.eventTimeCellTV);
             eventClubTextView = view.findViewById(R.id.eventClubCellTV);
             eventNameTextView = view.findViewById(R.id.eventNameCellTV);
+            this.onItemListenerBis = onItemListener;
+            view.setOnClickListener(this);
+            this.events = events;
+        }
+
+        @Override
+        public void onClick(View v) {
+            onItemListener.onItemClick(getAdapterPosition(),events.get(getAdapterPosition()));
         }
     }
 
-    public EventAdapter(List<Event> events, EventAdapter.OnItemListener onItemListener, boolean showDate) {
+    public EventAdapter(List<Event> events, OnItemListener onItemListener, boolean showDate) {
         this.events = events;
         this.onItemListener = onItemListener;
         this.showDate = showDate;
@@ -54,7 +63,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         eventNameCellTV.setText(eventName);
         */
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_cell, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view,onItemListener,events);
     }
 
     @Override
@@ -78,6 +87,5 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     {
         void onItemClick(int position, Event event);
 
-        void onItemClick(int position, LocalDate date);
     }
 }

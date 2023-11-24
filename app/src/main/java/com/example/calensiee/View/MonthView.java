@@ -40,7 +40,9 @@ public class MonthView extends AppCompatActivity implements CalendarAdapter.OnIt
 
     private void setMonthView()
     {
-        monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
+        String month = monthYearFromDate(CalendarUtils.selectedDate);
+        month = month.substring(0,1).toUpperCase() + month.substring(1);     //To capitalize the first lettre of the month
+        monthYearText.setText(month);
         ArrayList<LocalDate> daysInMonth = daysInMonthArray(CalendarUtils.selectedDate);
 
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, (CalendarAdapter.OnItemListener) this);
@@ -78,7 +80,12 @@ public class MonthView extends AppCompatActivity implements CalendarAdapter.OnIt
 
     @Override
     public void onItemClick(int position, LocalDate date) {
-        //do nothing
+        if(date == null){
+
+        }else{
+            CalendarUtils.selectedDate = date;      //Change the date
+            startActivity(new Intent(this, WeekViewActivity.class));
+        }
     }
 
     public void backToTodayAction(View view){
