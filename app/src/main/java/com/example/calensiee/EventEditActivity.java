@@ -22,6 +22,8 @@ import androidx.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,6 +38,9 @@ public class EventEditActivity extends AppCompatActivity
     private LocalTime time;
     private LocalDate date;
     private Button button;
+
+    DatabaseReference reference;
+    FirebaseDatabase db;
 
     private int mYear,mMonth,mDay,mHour,mMinute;
 
@@ -94,6 +99,17 @@ public class EventEditActivity extends AppCompatActivity
             String eventClub = eventClubET.getText().toString();
             int eventDuration = Integer.valueOf(eventDurationET.getText().toString());
             Event newEvent = new Event(eventName, LocalDate.of(mYear,mMonth,mDay), LocalTime.of(mHour,mMinute),eventPlace,"No description for this event.",eventDuration,eventClub);
+
+            /**
+            db=FirebaseDatabase.getInstance();
+            reference = db.getReference("Event");
+            reference.child(eventName).setValue(newEvent).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(EventEditActivity.this,"Successfuly Updated",Toast.LENGTH_SHORT).show();
+                }
+            });
+*/
             Event.eventsList.add(newEvent);
             finish();
         }
@@ -104,6 +120,16 @@ public class EventEditActivity extends AppCompatActivity
             int eventDuration = Integer.valueOf(eventDurationET.getText().toString());
             String eventDescription = eventDescriptionET.getText().toString();
             Event newEvent = new Event(eventName, LocalDate.of(mYear,mMonth,mDay), LocalTime.of(mHour,mMinute),eventPlace,eventDescription,eventDuration,eventClub);
+/**
+            db=FirebaseDatabase.getInstance();
+            reference = db.getReference("Event");
+            reference.child(eventName).setValue(newEvent).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(EventEditActivity.this,"Successfuly Updated",Toast.LENGTH_SHORT).show();
+                }
+            });
+*/
             Event.eventsList.add(newEvent);
             finish();
         }

@@ -16,16 +16,20 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class AccountCreate extends AppCompatActivity {
-
     private static final String TAG = "EmailPassword";
     // [START declare_auth]
     private FirebaseAuth mAuth;
     // [END declare_auth]
     private EditText textEmail;
     private EditText textPassword;
+
+    DatabaseReference reference;
+    FirebaseDatabase db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,10 +61,31 @@ public class AccountCreate extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                            Intent intent = new Intent(AccountCreate.this, MenuView.class);
-                            startActivity(intent);
+                            AccountUtil.user = mAuth.getCurrentUser();
+                            updateUI(AccountUtil.user);
+
+                            if(!AccountUtil.user.getUid().toString().isEmpty()){
+
+                                UserUtil accountInfos = new UserUtil(AccountUtil.user.getUid().toString(),false);
+                                db=FirebaseDatabase.getInstance();
+                                reference = FirebaseDatabase.getInstance("https://calensiee-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("user");
+                                Log.d(TAG, reference.toString());
+
+                                reference.child(accountInfos.getUserId()).setValue(accountInfos).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Toast.makeText(AccountCreate.this,"Successfuly created",Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(AccountCreate.this, MenuView.class);
+                                        startActivity(intent);
+                                    }
+                                });
+                            }else {
+                                // If sign in fails, display a message to the user.
+                                Log.e(TAG, "createUserIndatabase :failure", task.getException());
+                                Toast.makeText(AccountCreate.this, "Database failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -91,3 +116,33 @@ public class AccountCreate extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) { }
 }
+/**
+    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                if (currentUser != null) {
+
+                        String userId = currentUser.getUid();
+                        DatabaseReference userMoviesRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("movies");
+                        Movie movie = getIntent().getParcelableExtra("movie");
+                        userMoviesRef.child(String.valueOf(movie.getId())).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                Log.d("Firebase", "onDataChange: dataSnapshot.exists() = " + dataSnapshot.exists());
+
+                                if (!dataSnapshot.exists()) {
+                                // Le film n'est pas encore enregistré, ajoutez-le à la base de données
+                                userMoviesRef.child(String.valueOf(movie.getId())).setValue(movie);
+                                Toast.makeText(FilmDetailsActivity.this, "Film enregistré avec succès", Toast.LENGTH_SHORT).show();
+                                } else {
+                                // Le film est déjà enregistré
+                                Toast.makeText(FilmDetailsActivity.this, "Ce film est déjà enregistré", Toast.LENGTH_SHORT).show();
+                        }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                                Log.e("Firebase", "Erreur lors de l'accès à la base de données : " + databaseError.getMessage());
+                                }
+                                });
+                                } else {
+                                Toast.makeText(FilmDetailsActivity.this, "Vous etes pas authentifie", Toast.LENGTH_SHORT).show();
+                                }*/
