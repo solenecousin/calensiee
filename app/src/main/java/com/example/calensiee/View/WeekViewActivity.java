@@ -6,14 +6,18 @@ import static com.example.calensiee.CalendarUtils.monthYearFromDate;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.calensiee.AccountUtil;
 import com.example.calensiee.CalendarAdapter;
 import com.example.calensiee.CalendarUtils;
 import com.example.calensiee.Event;
@@ -21,6 +25,11 @@ import com.example.calensiee.EventAdapter;
 import com.example.calensiee.EventEditActivity;
 import com.example.calensiee.EventUtils;
 import com.example.calensiee.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -33,6 +42,9 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
     private RecyclerView eventRecyclerView;
+    private boolean showButtonNewEvent;
+    DatabaseReference reference;
+    private Button btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -42,7 +54,18 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
         initWidgets();
         setWeekView();
         setEventAdpater();
-        EventUtils.selectedEvent = new Event("",LocalDate.now(),LocalTime.now(),"","",1,"");
+        showButton();
+        EventUtils.selectedEvent = new Event("",LocalDate.now().getYear(),LocalDate.now().getMonthValue(),
+                LocalDate.now().getDayOfMonth(),LocalTime.now().getHour(),LocalTime.now().getMinute(),
+                "","","",1);
+    }
+
+    private void showButton() {
+        if(AccountUtil.isAdmin){
+            this.btn.setVisibility(Button.VISIBLE);
+        }else{
+            this.btn.setVisibility(Button.GONE);
+        }
     }
 
     private void initWidgets()
@@ -50,6 +73,8 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
         monthYearText = findViewById(R.id.monthYearTV);
         eventRecyclerView = findViewById(R.id.eventRecycleView);
+        btn = findViewById(R.id.newEventButton);
+
     }
 
     private void setWeekView()
@@ -103,7 +128,7 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
     private void setEventAdpater()
     {
         ArrayList<Event> dailyEvents = Event.eventsForDate(CalendarUtils.selectedDate);     //Select events of a specific day
-        dailyEvents.sort(Comparator.comparing(Event::getTime));                             //Sort events by time
+        dailyEvents.sort(Comparator.comparing(Event::getTimeOfEvent));                             //Sort events by time
         EventAdapter eventAdapter = new EventAdapter(dailyEvents, this,false);
         eventRecyclerView.setAdapter(eventAdapter);
         eventRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -121,4 +146,6 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
         setWeekView();
         setEventAdpater();
     }
+
+
 }

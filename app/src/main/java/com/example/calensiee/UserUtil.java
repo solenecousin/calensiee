@@ -20,6 +20,8 @@ public class UserUtil{
         this.userId = userId;
     }
 
+
+
     public boolean isAdmin() {
         return isAdmin;
     }

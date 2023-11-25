@@ -11,11 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.calensiee.View.MenuView;
+import com.example.calensiee.View.WeekViewActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -75,6 +77,22 @@ public class AccountCreate extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         Toast.makeText(AccountCreate.this,"Successfuly created",Toast.LENGTH_SHORT).show();
+                                        reference = FirebaseDatabase.getInstance("https://calensiee-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("user");
+                                        reference.child(AccountUtil.user.getUid().toString()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    if (task.getResult().exists()) {
+                                                        Toast.makeText(AccountCreate.this, "Welcome", Toast.LENGTH_SHORT).show();
+                                                        DataSnapshot dataSnapshot = task.getResult();
+                                                        AccountUtil.isAdmin = Boolean.valueOf(String.valueOf(dataSnapshot.child("admin").getValue()));
+                                                    } else {
+                                                        Toast.makeText(AccountCreate.this, "User Doesn't Exist", Toast.LENGTH_SHORT).show();
+                                                    }
+
+                                                }
+                                            }
+                                        });
                                         Intent intent = new Intent(AccountCreate.this, MenuView.class);
                                         startActivity(intent);
                                     }

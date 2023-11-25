@@ -72,9 +72,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         holder.eventNameTextView.setText(eventToView.getName());
         holder.eventClubTextView.setText(eventToView.getClub());
         if(showDate){
-            holder.eventTimeTextView.setText(CalendarUtils.formattedDate(eventToView.getDate())+"  "+eventToView.getTime().toString());
+            holder.eventTimeTextView.setText(CalendarUtils.formattedDate(eventToView.getDateOfEvent())+"  "+eventToView.getTimeOfEvent().toString());
         }else{
-            holder.eventTimeTextView.setText(eventToView.getTime().toString());
+            holder.eventTimeTextView.setText(eventToView.getTimeOfEvent().toString());
         }
 
     }

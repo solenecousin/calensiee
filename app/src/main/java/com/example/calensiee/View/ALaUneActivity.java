@@ -31,7 +31,9 @@ public class ALaUneActivity extends AppCompatActivity implements EventAdapter.On
         setContentView(R.layout.alaune);
         initWidgets();
         setEventAdpater();
-        EventUtils.selectedEvent = new Event("",LocalDate.now(), LocalTime.now(),"","",1,"");
+        EventUtils.selectedEvent = new Event("",LocalDate.now().getYear(),LocalDate.now().getMonthValue(),
+                LocalDate.now().getDayOfMonth(),LocalTime.now().getHour(),LocalTime.now().getMinute(),
+                "","","",1);
     }
 
     private void initWidgets()
@@ -45,7 +47,7 @@ public class ALaUneActivity extends AppCompatActivity implements EventAdapter.On
 
         for(long i=1;i<7;i++){
             ArrayList<Event> dailyEvents = Event.eventsForDate(LocalDate.now().plusDays(i));
-            dailyEvents.sort(Comparator.comparing(Event::getTime));
+            dailyEvents.sort(Comparator.comparing(Event::getTimeOfEvent));
             oneWeekEvent.addAll(dailyEvents);
         }
 

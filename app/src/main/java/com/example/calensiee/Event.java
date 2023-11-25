@@ -13,7 +13,7 @@ public class Event
         ArrayList<Event> events = new ArrayList<>();
         for(Event event : eventsList)
         {
-            if(event.getDate().equals(date))
+            if(LocalDate.of(event.getYear(),event.getMonth(),event.getDay()).equals(date))
                 events.add(event);
         }
         return events;
@@ -21,11 +21,28 @@ public class Event
 
 
     private String name;
-    private LocalDate date;
-    private LocalTime time;
+    //private LocalDate date;
+    //private LocalTime time;
+    private int mYear,mMonth,mDay,mHour,mMinute;
     private String place, description, club;
     private int  duration;
 
+    public Event(String name, int mYear, int mMonth, int mDay, int mHour, int mMinute, String place, String description, String club, int duration) {
+        this.name = name;
+        this.mYear = mYear;
+        this.mMonth = mMonth;
+        this.mDay = mDay;
+        this.mHour = mHour;
+        this.mMinute = mMinute;
+        this.place = place;
+        this.description = description;
+        this.club = club;
+        this.duration = duration;
+    }
+
+
+
+    /**
     public Event(String name, LocalDate date, LocalTime time)
     {
         this.name = name;
@@ -52,6 +69,7 @@ public class Event
         this.description = description;
         this.club = club;
     }
+ */
 
     public String getName()
     {
@@ -63,26 +81,29 @@ public class Event
         this.name = name;
     }
 
-    public LocalDate getDate()
+    public LocalDate getDateOfEvent()
     {
-        return date;
+        return LocalDate.of(this.mYear,this.mMonth,this.mDay);
     }
+    public LocalTime getTimeOfEvent()
+    {
+        return LocalTime.of(this.mHour,this.mDay);
+    }
+/**
+
 
     public void setDate(LocalDate date)
     {
         this.date = date;
     }
 
-    public LocalTime getTime()
-    {
-        return time;
-    }
+
 
     public void setTime(LocalTime time)
     {
         this.time = time;
     }
-
+*/
     public String getPlace()
     {
         return place;
@@ -90,6 +111,50 @@ public class Event
     public void setPlace(String place)
     {
         this.place = place;
+    }
+
+    public int getYear() {
+        return mYear;
+    }
+
+    public void setYear(int mYear) {
+        this.mYear = mYear;
+    }
+
+    public int getMonth() {
+        return mMonth;
+    }
+
+    public void setMonth(int mMonth) {
+        this.mMonth = mMonth;
+    }
+
+    public int getDay() {
+        return mDay;
+    }
+
+    public void setDay(int mDay) {
+        this.mDay = mDay;
+    }
+
+    public int getHour() {
+        return mHour;
+    }
+
+    public void setHour(int mHour) {
+        this.mHour = mHour;
+    }
+
+    public int getMinute() {
+        return mMinute;
+    }
+
+    public void setMinute(int mMinute) {
+        this.mMinute = mMinute;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     public String getDescription()

@@ -32,6 +32,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class EmailPasswordActivity extends AppCompatActivity
 {
@@ -41,6 +44,7 @@ public class EmailPasswordActivity extends AppCompatActivity
     // [END declare_auth]
     private EditText textEmail;
     private EditText textPassword;
+    private DatabaseReference reference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,6 +82,24 @@ public class EmailPasswordActivity extends AppCompatActivity
                             Log.d(TAG, "signInWithEmail:success");
                             AccountUtil.user = mAuth.getCurrentUser();
                             updateUI(AccountUtil.user);
+                            //
+                            reference = FirebaseDatabase.getInstance("https://calensiee-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("user");
+                            reference.child(AccountUtil.user.getUid().toString()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        if (task.getResult().exists()) {
+                                            Toast.makeText(EmailPasswordActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+                                            DataSnapshot dataSnapshot = task.getResult();
+                                            AccountUtil.isAdmin = Boolean.valueOf(String.valueOf(dataSnapshot.child("admin").getValue()));
+                                        } else {
+                                            Toast.makeText(EmailPasswordActivity.this, "User Doesn't Exist", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                    }
+                                }
+                            });
+
                             Intent intent = new Intent(EmailPasswordActivity.this, MenuView.class);
                             startActivity(intent);
                         } else {

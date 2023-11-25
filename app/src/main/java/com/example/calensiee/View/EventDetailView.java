@@ -39,8 +39,8 @@ public class EventDetailView extends AppCompatActivity {
     private void setEvent(){
         eventName.setText(EventUtils.selectedEvent.getName());
         eventClub.setText(EventUtils.selectedEvent.getClub());
-        eventTime.setText(EventUtils.selectedEvent.getTime().toString());
-        eventDate.setText(CalendarUtils.formattedDate(EventUtils.selectedEvent.getDate()));
+        eventTime.setText(EventUtils.selectedEvent.getTimeOfEvent().toString());
+        eventDate.setText(CalendarUtils.formattedDate(EventUtils.selectedEvent.getDateOfEvent()));
         eventDuration.setText(String.valueOf(EventUtils.selectedEvent.getDuration()));
         eventDescription.setText(EventUtils.selectedEvent.getDescription());
         eventPlace.setText(EventUtils.selectedEvent.getPlace());

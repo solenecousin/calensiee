@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/saveEvent"
         android:layout_width="wrap_content"
         android:layout_height="58dp"
         android:layout_gravity="center"
@@ -27,7 +27,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="24dp"
         android:background="@drawable/ic_blue_pills_button"
-        android:onClick="saveEventAction"
         android:text="Enregitrer"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/esiee_light_grey"
@@ -44,7 +43,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/button10"
+        app:layout_constraintBottom_toTopOf="@+id/saveEvent"
         app:layout_constraintTop_toBottomOf="@+id/button9"
         tools:layout_editor_absoluteX="1dp">
 

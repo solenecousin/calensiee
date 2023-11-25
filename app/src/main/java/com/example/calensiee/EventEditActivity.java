@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,8 @@ import androidx.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.calensiee.View.MenuView;
+import com.example.calensiee.View.WeekViewActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
@@ -33,11 +36,12 @@ import com.google.firebase.database.ValueEventListener;
 
 public class EventEditActivity extends AppCompatActivity
 {
+    private static final String TAG = "Event";
     private EditText eventNameET;
     private TextView eventDateET, eventTimeET, eventPlaceET,eventDurationET,eventClubET,eventDescriptionET;
     private LocalTime time;
     private LocalDate date;
-    private Button button;
+    private Button button,save;
 
     DatabaseReference reference;
     FirebaseDatabase db;
@@ -64,6 +68,7 @@ public class EventEditActivity extends AppCompatActivity
         eventTimeET.setText("Time : "+CalendarUtils.formattedTime(LocalTime.of(mHour,mMinute)));
 
         button = findViewById(R.id.button);
+        save   = findViewById(R.id.saveEvent);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,6 +76,48 @@ public class EventEditActivity extends AppCompatActivity
                 openTimePicker(); //Open time picker dialog
             }
         });
+
+/**
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String eventName = eventNameET.getText().toString();
+                String eventPlace = eventPlaceET.getText().toString();
+                String eventClub = eventClubET.getText().toString();
+                int eventDuration = Integer.valueOf(eventDurationET.getText().toString());
+                String eventDescription = eventDescriptionET.getText().toString();
+
+                if(!eventName.isEmpty() && !eventPlace.isEmpty() && !eventClub.isEmpty() && !String.valueOf(eventDuration).isEmpty()
+                        && !String.valueOf(mYear).isEmpty() && !String.valueOf(mMonth).isEmpty() && !String.valueOf(mDay).isEmpty()
+                        && !String.valueOf(mMinute).isEmpty() && !String.valueOf(mHour).isEmpty()){
+
+
+                    Event newEvent = new Event(eventName,mYear,mMonth,mDay,mHour,mMinute ,eventPlace,eventDescription,eventClub,eventDuration);
+
+                    db=FirebaseDatabase.getInstance();
+                    reference = FirebaseDatabase.getInstance("https://calensiee-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("events");
+
+                    Log.d(TAG, reference.toString());
+
+                    reference.child(newEvent.getName()).setValue(newEvent).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                            //Event.eventsList.add(newEvent);
+                            Toast.makeText(EventEditActivity.this,"Successfuly created",Toast.LENGTH_SHORT).show();
+                            CalendarUtils.selectedDate=LocalDate.now();
+                            Intent intent = new Intent(EventEditActivity.this, WeekViewActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }else{
+                    Toast.makeText(EventEditActivity.this, "Please fill in all fields.",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+ */
     }
 
     private void initWidgets()
@@ -86,53 +133,7 @@ public class EventEditActivity extends AppCompatActivity
 
     public void saveEventAction(View view)
     {
-        if(eventNameET.getText().toString().isEmpty() || eventPlaceET.getText().toString().isEmpty() ||
-                eventClubET.getText().toString().isEmpty() || eventDurationET.getText().toString().isEmpty()){
 
-            Toast.makeText(EventEditActivity.this, "Please fill in all fields.",
-                    Toast.LENGTH_SHORT).show();
-
-        }
-        else if(eventDescriptionET.getText().toString().isEmpty()){
-            String eventName = eventNameET.getText().toString();
-            String eventPlace = eventPlaceET.getText().toString();
-            String eventClub = eventClubET.getText().toString();
-            int eventDuration = Integer.valueOf(eventDurationET.getText().toString());
-            Event newEvent = new Event(eventName, LocalDate.of(mYear,mMonth,mDay), LocalTime.of(mHour,mMinute),eventPlace,"No description for this event.",eventDuration,eventClub);
-
-            /**
-            db=FirebaseDatabase.getInstance();
-            reference = db.getReference("Event");
-            reference.child(eventName).setValue(newEvent).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    Toast.makeText(EventEditActivity.this,"Successfuly Updated",Toast.LENGTH_SHORT).show();
-                }
-            });
-*/
-            Event.eventsList.add(newEvent);
-            finish();
-        }
-        else{
-            String eventName = eventNameET.getText().toString();
-            String eventPlace = eventPlaceET.getText().toString();
-            String eventClub = eventClubET.getText().toString();
-            int eventDuration = Integer.valueOf(eventDurationET.getText().toString());
-            String eventDescription = eventDescriptionET.getText().toString();
-            Event newEvent = new Event(eventName, LocalDate.of(mYear,mMonth,mDay), LocalTime.of(mHour,mMinute),eventPlace,eventDescription,eventDuration,eventClub);
-/**
-            db=FirebaseDatabase.getInstance();
-            reference = db.getReference("Event");
-            reference.child(eventName).setValue(newEvent).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    Toast.makeText(EventEditActivity.this,"Successfuly Updated",Toast.LENGTH_SHORT).show();
-                }
-            });
-*/
-            Event.eventsList.add(newEvent);
-            finish();
-        }
     }
     public void backToWeekAction(View view){
         this.finish();
