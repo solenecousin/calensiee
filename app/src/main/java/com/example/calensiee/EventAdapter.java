@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
@@ -50,18 +51,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        /**
-        TextView eventClubCellTV = parent.findViewById(R.id.eventClubCellTV);
-        TextView eventTimeCellTV = parent.findViewById(R.id.eventTimeCellTV);
-        TextView eventNameCellTV = parent.findViewById(R.id.eventNameCellTV);
-
-        String eventClub = event.getClub();
-        eventClubCellTV.setText(eventClub);
-        String eventTime = CalendarUtils.formattedTime(event.getTime());
-        eventTimeCellTV.setText(eventTime);
-        String eventName = event.getName();
-        eventNameCellTV.setText(eventName);
-        */
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_cell, parent, false);
         return new ViewHolder(view,onItemListener,events);
     }
@@ -72,9 +61,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         holder.eventNameTextView.setText(eventToView.getName());
         holder.eventClubTextView.setText(eventToView.getClub());
         if(showDate){
-            holder.eventTimeTextView.setText(CalendarUtils.formattedDate(eventToView.getDateOfEvent())+"  "+eventToView.getTimeOfEvent().toString());
+            LocalDate date = LocalDate.of(eventToView.getmYear(),eventToView.getmMonth(),eventToView.getmDay());
+            LocalTime time = LocalTime.of(eventToView.getmHour(),eventToView.getmMinute());
+            holder.eventTimeTextView.setText(CalendarUtils.formattedDate(date)+"  "+time.toString());
         }else{
-            holder.eventTimeTextView.setText(eventToView.getTimeOfEvent().toString());
+            LocalTime time = LocalTime.of(eventToView.getmHour(),eventToView.getmMinute());
+            holder.eventTimeTextView.setText(time.toString());
         }
 
     }

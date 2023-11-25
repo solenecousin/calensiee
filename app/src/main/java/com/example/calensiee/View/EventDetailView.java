@@ -12,6 +12,7 @@ import com.example.calensiee.EventUtils;
 import com.example.calensiee.R;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class EventDetailView extends AppCompatActivity {
 
@@ -39,11 +40,15 @@ public class EventDetailView extends AppCompatActivity {
     private void setEvent(){
         eventName.setText(EventUtils.selectedEvent.getName());
         eventClub.setText(EventUtils.selectedEvent.getClub());
-        eventTime.setText(EventUtils.selectedEvent.getTimeOfEvent().toString());
-        eventDate.setText(CalendarUtils.formattedDate(EventUtils.selectedEvent.getDateOfEvent()));
         eventDuration.setText(String.valueOf(EventUtils.selectedEvent.getDuration()));
         eventDescription.setText(EventUtils.selectedEvent.getDescription());
         eventPlace.setText(EventUtils.selectedEvent.getPlace());
+
+        LocalTime time = LocalTime.of(EventUtils.selectedEvent.getmHour(),EventUtils.selectedEvent.getmMinute());
+        eventTime.setText(time.toString());
+
+        LocalDate date = LocalDate.of(EventUtils.selectedEvent.getmYear(),EventUtils.selectedEvent.getmMonth(),EventUtils.selectedEvent.getmDay());
+        eventDate.setText(CalendarUtils.formattedDate(date));
     }
     public void backToLastActivityAction(View view){
         this.finish();

@@ -6,14 +6,16 @@ import java.util.ArrayList;
 
 public class Event
 {
-    public static ArrayList<Event> eventsList = new ArrayList<>();
 
-    public static ArrayList<Event> eventsForDate(LocalDate date)
+    private ArrayList<Event> eventsList = new ArrayList<>();
+
+    public ArrayList<Event> eventsForDate(LocalDate date)
     {
+
         ArrayList<Event> events = new ArrayList<>();
-        for(Event event : eventsList)
+        for(Event event : this.eventsList)
         {
-            if(LocalDate.of(event.getYear(),event.getMonth(),event.getDay()).equals(date))
+            if(LocalDate.of(event.getmYear(),event.getmMonth(),event.getmDay()).equals(date))
                 events.add(event);
         }
         return events;
@@ -21,11 +23,13 @@ public class Event
 
 
     private String name;
+
     //private LocalDate date;
     //private LocalTime time;
     private int mYear,mMonth,mDay,mHour,mMinute;
     private String place, description, club;
     private int  duration;
+
 
     public Event(String name, int mYear, int mMonth, int mDay, int mHour, int mMinute, String place, String description, String club, int duration) {
         this.name = name;
@@ -41,133 +45,83 @@ public class Event
     }
 
 
-
-    /**
-    public Event(String name, LocalDate date, LocalTime time)
-    {
-        this.name = name;
-        this.date = date;
-        this.time = time;
-    }
-
-    public Event(String name, LocalDate date, LocalTime time,String place, String description, int duration, String club)
-    {
-        this.name = name;
-        this.date = date;
-        this.time = time;
-        this.place = place;
-        this.description = description;
-        this.duration = duration;
-        this.club = club;
-    }
-    public Event(String name, LocalDate date, LocalTime time,String place, String description, String club)
-    {
-        this.name = name;
-        this.date = date;
-        this.time = time;
-        this.place = place;
-        this.description = description;
-        this.club = club;
-    }
- */
-
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public LocalDate getDateOfEvent()
-    {
-        return LocalDate.of(this.mYear,this.mMonth,this.mDay);
-    }
-    public LocalTime getTimeOfEvent()
-    {
-        return LocalTime.of(this.mHour,this.mDay);
-    }
-/**
-
-
-    public void setDate(LocalDate date)
-    {
-        this.date = date;
-    }
-
-
-
-    public void setTime(LocalTime time)
-    {
-        this.time = time;
-    }
-*/
-    public String getPlace()
-    {
-        return place;
-    }
-    public void setPlace(String place)
-    {
-        this.place = place;
-    }
-
-    public int getYear() {
+    public int getmYear() {
         return mYear;
     }
 
-    public void setYear(int mYear) {
+    public void setmYear(int mYear) {
         this.mYear = mYear;
     }
 
-    public int getMonth() {
+    public int getmMonth() {
         return mMonth;
     }
 
-    public void setMonth(int mMonth) {
+    public void setmMonth(int mMonth) {
         this.mMonth = mMonth;
     }
 
-    public int getDay() {
+    public int getmDay() {
         return mDay;
     }
 
-    public void setDay(int mDay) {
+    public void setmDay(int mDay) {
         this.mDay = mDay;
     }
 
-    public int getHour() {
+    public int getmHour() {
         return mHour;
     }
 
-    public void setHour(int mHour) {
+    public void setmHour(int mHour) {
         this.mHour = mHour;
     }
 
-    public int getMinute() {
+    public int getmMinute() {
         return mMinute;
     }
 
-    public void setMinute(int mMinute) {
+    public void setmMinute(int mMinute) {
         this.mMinute = mMinute;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getClub() {
+        return club;
+    }
+
+    public void setClub(String club) {
+        this.club = club;
+    }
+
+    public int getDuration() {
+        return duration;
     }
 
     public void setDuration(int duration) {
         this.duration = duration;
     }
-
-    public String getDescription()
-    {
-        return description;
-    }
-
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
-
-    public String getClub(){ return club; }
-    public void setClub(String club){this.club = club;}
-    public int getDuration() {return duration;}
 }

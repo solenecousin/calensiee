@@ -43,17 +43,18 @@ public class ALaUneActivity extends AppCompatActivity implements EventAdapter.On
 
     private void setEventAdpater()
     {
-        ArrayList<Event> oneWeekEvent = Event.eventsForDate(LocalDate.now());
+       /** ArrayList<Event> oneWeekEvent = Event.eventsForDate(LocalDate.now());
 
         for(long i=1;i<7;i++){
             ArrayList<Event> dailyEvents = Event.eventsForDate(LocalDate.now().plusDays(i));
-            dailyEvents.sort(Comparator.comparing(Event::getTimeOfEvent));
+            //dailyEvents.sort(Comparator.comparing(Event::getTimeOfEvent));
             oneWeekEvent.addAll(dailyEvents);
         }
 
         EventAdapter eventAdapter = new EventAdapter(oneWeekEvent, this,true);
         eventRecyclerView.setAdapter(eventAdapter);
         eventRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        */
     }
 
     @Override

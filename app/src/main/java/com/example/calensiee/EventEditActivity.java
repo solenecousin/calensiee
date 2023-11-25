@@ -77,21 +77,22 @@ public class EventEditActivity extends AppCompatActivity
             }
         });
 
-/**
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String eventName = eventNameET.getText().toString();
-                String eventPlace = eventPlaceET.getText().toString();
-                String eventClub = eventClubET.getText().toString();
-                int eventDuration = Integer.valueOf(eventDurationET.getText().toString());
-                String eventDescription = eventDescriptionET.getText().toString();
-
-                if(!eventName.isEmpty() && !eventPlace.isEmpty() && !eventClub.isEmpty() && !String.valueOf(eventDuration).isEmpty()
+                if(!eventNameET.getText().toString().isEmpty() && !eventPlaceET.getText().toString().isEmpty()
+                        && !eventClubET.getText().toString().isEmpty() && !eventDurationET.getText().toString().isEmpty()
                         && !String.valueOf(mYear).isEmpty() && !String.valueOf(mMonth).isEmpty() && !String.valueOf(mDay).isEmpty()
                         && !String.valueOf(mMinute).isEmpty() && !String.valueOf(mHour).isEmpty()){
 
+
+                    String eventName = eventNameET.getText().toString();
+                    String eventPlace = eventPlaceET.getText().toString();
+                    String eventClub = eventClubET.getText().toString();
+                    int eventDuration = Integer.valueOf(eventDurationET.getText().toString());
+                    String eventDescription = eventDescriptionET.getText().toString();
 
                     Event newEvent = new Event(eventName,mYear,mMonth,mDay,mHour,mMinute ,eventPlace,eventDescription,eventClub,eventDuration);
 
@@ -100,7 +101,7 @@ public class EventEditActivity extends AppCompatActivity
 
                     Log.d(TAG, reference.toString());
 
-                    reference.child(newEvent.getName()).setValue(newEvent).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    reference.child(String.valueOf(newEvent.getmYear())).child(String.valueOf(newEvent.getmMonth())).child(String.valueOf(newEvent.getmDay())).push().setValue(newEvent).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
 
@@ -117,7 +118,7 @@ public class EventEditActivity extends AppCompatActivity
                 }
             }
         });
- */
+
     }
 
     private void initWidgets()
@@ -131,10 +132,6 @@ public class EventEditActivity extends AppCompatActivity
         eventDescriptionET = findViewById(R.id.eventDescriptionTV);
     }
 
-    public void saveEventAction(View view)
-    {
-
-    }
     public void backToWeekAction(View view){
         this.finish();
     }
