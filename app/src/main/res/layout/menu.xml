@@ -52,6 +52,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/ic_light_grey_pills_button"
         android:text="Prévention"
+        android:onClick="prevention"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toTopOf="@+id/mon_compte"
         app:layout_constraintEnd_toEndOf="parent"

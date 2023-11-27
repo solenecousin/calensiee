@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.calensiee.Lecture;
 import com.example.calensiee.R;
 
 public class MenuView extends AppCompatActivity
@@ -34,4 +35,5 @@ public class MenuView extends AppCompatActivity
         startActivity(new Intent(this, ALaUneActivity.class));
     }
 
+    public void prevention(View view){ startActivity(new Intent(this, Lecture.class));}
 }
